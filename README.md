@@ -23,6 +23,10 @@
 - Login and check if the data is coming in or not
 - NavBar should update when login successful
 - Refactor our code and add constants files + create a components folder and move all components there
+- You should not be access other routes without login
+- If token is not present, redirect user to login page
+- Logout 
+- Profile Page
 
 Body 
     Router
