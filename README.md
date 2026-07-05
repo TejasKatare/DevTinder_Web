@@ -27,6 +27,18 @@
 - If token is not present, redirect user to login page
 - Logout 
 - Profile Page
+- Get the feed and add the feed in the store
+- Build the user card on the feed
+- Edit Profile Feature
+- Show Toast Message on save of profile 
+- New Page - See all my connections
+- New Page - See all my requests
+- Feature - Accept/Reject Connection Request
+
+- Remaining: 
+- Send/Ignore the user card from Feed
+- Signup New User
+- E2E Testing
 
 Body 
     Router

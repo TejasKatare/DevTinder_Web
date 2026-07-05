@@ -11,7 +11,6 @@ const Body = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((store) => store.user);
-
     const fetchUser = async () => {
         if (userData) {
             return;
@@ -29,7 +28,9 @@ const Body = () => {
     }
 
     useEffect(() => {
-        fetchUser();
+        if(!userData) {
+            fetchUser();
+        }
     }, []);
 
     return (

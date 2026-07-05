@@ -1,9 +1,43 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addFeed } from "../utils/feedSlice";
+import { useEffect } from "react";
+import UserCard from "./UserCard";
 
 const Feed = () => {
+
+    const feed = useSelector((store) => store.feed);
+    //console.log(feed);
+    const dispatch = useDispatch();
+    const getFeed = async () => {
+        if(feed){
+            return;
+        }
+        try{
+            const res = await axios.get(BASE_URL + "/user/feed", {withCredentials: true});
+            dispatch(addFeed(res.data.data));
+        } catch (error) {
+            console.error("Error fetching feed:", error);
+        }
+    };
+
+    useEffect(() => {
+        getFeed();
+    }, [feed]);
+
+    if(!feed) return;
+    
+    if(feed.length <= 0) return (<div className="flex-1 flex m-10 justify-center">
+               No New Users Found
+            </div>);
+
     return (
-        <div className="flex-1">
-            <h1>Feed</h1>
-        </div>
+        feed && (
+            <div className="flex-1 flex flex-col items-center justify-center">
+                <UserCard user={feed[0]} />
+            </div>
+        )
     );
 }
 

@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("Tejas@123");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const handleLogin = async () => {
     try {
       const res = await axios.post(BASE_URL + "/auth/login", {
@@ -20,7 +21,8 @@ const Login = () => {
       dispatch(addUser(res.data));
       navigate("/"); // Redirect to home page after successful login
     } catch (err) {
-        console.error(err);
+      setError(err?.response?.data?.message || "Login failed");
+      console.error(err?.response?.data?.message || err.message);
     }
   };
 
@@ -95,8 +97,10 @@ const Login = () => {
                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
               />
             </label>
-            <p className="validator-hint hidden">Enter correct password</p>
+            <p className="validator-hint hidden">Not a strong password nigga</p>
           </div>
+
+          <p className="text-error">{error}</p>
 
           <div className="card-actions justify-end">
             <button className="btn btn-primary " onClick={handleLogin}>Login</button>

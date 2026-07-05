@@ -1,10 +1,30 @@
-import {useSelector} from "react-redux";
-import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import axios from "axios";
+import { removeUser } from "../utils/userSlice";
+import { removeFeed } from "../utils/feedSlice";
 
 const NavBar = () => {
 
   const user = useSelector((store) => store.user);
-  console.log(user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //console.log("NavBar user: ", user);
+
+  const handleLogout = async () => {
+    try{
+      await axios.post(BASE_URL + "/auth/logout", {}, {withCredentials: true});
+      //reload the page after logout
+      //window.location.reload();
+      dispatch(removeUser());
+      dispatch(removeFeed());
+      navigate("/login");
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <div>
@@ -35,15 +55,25 @@ const NavBar = () => {
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
-                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/connections" className="justify-between">
+                    Connections
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/requests" className="justify-between">
+                    Requests
                   </Link>
                 </li>
                 <li>
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a onClick = {handleLogout} >Logout</a>
                 </li>
+
               </ul>
             </div>
           </div>
