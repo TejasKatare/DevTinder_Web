@@ -6,11 +6,13 @@ const feedSlice = createSlice({
     reducers:{
         addFeed: (state, action) => action.payload,
         removeFeed: (state, action) => {
+            if(!action) return null;
             const newFeed = state.filter((user) => user._id !== action.payload);
             return newFeed;
         },
+        removedFeedTotal: (state, action) => null
     }
 });
 
-export const { addFeed, removeFeed } = feedSlice.actions;
+export const { addFeed, removeFeed, removedFeedTotal } = feedSlice.actions;
 export default feedSlice.reducer;

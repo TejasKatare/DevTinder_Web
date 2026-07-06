@@ -33,6 +33,7 @@ const Login = () => {
           <h2 className="card-title">Login</h2>
 
           <div className="m-5">
+            <label>Email</label>
             <label className="input validator">
               <svg
                 className="h-[1em] opacity-50"
@@ -64,6 +65,7 @@ const Login = () => {
           </div>
 
           <div className="mb-5 ml-5 mr-5">
+            <label>Password</label>
             <label className="input validator">
               <svg
                 className="h-[1em] opacity-50"
@@ -102,7 +104,8 @@ const Login = () => {
 
           <p className="text-error">{error}</p>
 
-          <div className="card-actions justify-end">
+          <div className="flex card-actions justify-end">
+            <p className="text-error cursor-pointer" onClick={() => navigate('/signup')}>SignUp Here!</p>
             <button className="btn btn-primary " onClick={handleLogin}>Login</button>
           </div>
         </div>

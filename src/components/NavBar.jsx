@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
-import { removeFeed } from "../utils/feedSlice";
+import { removeFeed, removedFeedTotal } from "../utils/feedSlice";
 
 const NavBar = () => {
 
@@ -18,7 +18,7 @@ const NavBar = () => {
       //reload the page after logout
       //window.location.reload();
       dispatch(removeUser());
-      dispatch(removeFeed());
+      dispatch(removedFeedTotal());
       navigate("/login");
     }
     catch(err){
@@ -44,7 +44,7 @@ const NavBar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src={user.photoUrl}
+                    src={user.photoUrl || null}
                   />
                 </div>
               </div>
