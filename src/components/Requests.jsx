@@ -49,12 +49,11 @@ const Requests = () => {
                 const {firstName, lastName, age, gender, photoUrl} = request.user || {};
                 //console.log(request.user);
                 const id = request._id;
-                if(!photoUrl) photoUrl = null;
                 return (
                     <div key={id} className="bg-black flex flex-col rounded-box p-3">
                     <div className="m-2 p-2 flex justify- w-150  bg-black items-center justify-evenly ">
                         <div className = "">
-                            <img className=" w-30 h-30 object-cover rounded-full" src={photoUrl} alt="User Icon"></img>
+                            <img className=" w-30 h-30 object-cover rounded-full" src={photoUrl || null} alt="User Icon"></img>
                         </div>
                         <div className="font-medium  font p-2">
                             <h2 className="p-2">{firstName + " " + lastName}</h2>
