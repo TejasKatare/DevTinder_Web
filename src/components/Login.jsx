@@ -19,6 +19,7 @@ const Login = () => {
         password: password,
       },{withCredentials: true});
       dispatch(addUser(res.data));
+      console.log(res.data);
       navigate("/"); // Redirect to home page after successful login
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed");
